@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PortalAcademico.Dominio\PortalAcademico.Dominio.csproj" />
+    <ProjectReference Include="..\PortalAcademico.Infra\PortalAcademico.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
