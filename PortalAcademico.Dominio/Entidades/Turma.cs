@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace PortalAcademico.Dominio.Entidades
 {
-    public class Aluno
+    public class Turma
     {
-        public Aluno() { }
+        public Turma()
+        {
+            Alunos = new List<Aluno>();
+        }
 
         public int Id { get; set; }
         public string Nome { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public DateTime DataNascimento { get; set; }
+        public int Ano { get; set; }
 
-        public int TurmaId { get; set; }
-        public Turma Turma { get; set; } = null!;
+        public ICollection<Aluno> Alunos { get; set; }
     }
 
 }

@@ -10,8 +10,8 @@ using PortalAcademico.Infra.Context;
 
 namespace PortalAcademico.Infra.Migrations
 {
-    [DbContext(typeof(AlunoDbContext))]
-    partial class AlunoDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PortalAcademicoDbContext))]
+    partial class PortalAcademicoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -43,9 +43,51 @@ namespace PortalAcademico.Infra.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("TurmaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("TurmaId");
+
                     b.ToTable("Alunos", (string)null);
+                });
+
+            modelBuilder.Entity("PortalAcademico.Dominio.Entidades.Turma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Turmas", (string)null);
+                });
+
+            modelBuilder.Entity("PortalAcademico.Dominio.Entidades.Aluno", b =>
+                {
+                    b.HasOne("PortalAcademico.Dominio.Entidades.Turma", "Turma")
+                        .WithMany("Alunos")
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Turma");
+                });
+
+            modelBuilder.Entity("PortalAcademico.Dominio.Entidades.Turma", b =>
+                {
+                    b.Navigation("Alunos");
                 });
 #pragma warning restore 612, 618
         }

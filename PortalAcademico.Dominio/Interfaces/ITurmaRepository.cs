@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PortalAcademico.Dominio.Interfaces
 {
-    public interface IAlunoRepository : IRepository<Aluno>
+    public interface ITurmaRepository : IRepository<Turma>
     {
-        Task<List<Aluno>> GetAllWithTurmaAsync();
     }
+
 }

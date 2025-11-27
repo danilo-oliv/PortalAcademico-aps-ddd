@@ -1,14 +1,26 @@
-using PortalAcademico.Aplicacao.Interfaces;
-using PortalAcademico.Aplicacao.Services;
-using PortalAcademico.Infra.Context;
 using Microsoft.EntityFrameworkCore;
+using PortalAcademico.Aplicacao.Interfaces;
+using PortalAcademico.Aplicacao.Mapping;
+using PortalAcademico.Aplicacao.Services;
+using PortalAcademico.Dominio.Interfaces;
+using PortalAcademico.Infra.Context;
+using PortalAcademico.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AlunoDbContext>(options =>
+builder.Services.AddDbContext<PortalAcademicoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IAlunoService, AlunoService>();
+
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
+
+builder.Services.AddScoped<IAlunoAppService, AlunoAppService>();
+builder.Services.AddScoped<ITurmaAppService, TurmaAppService>();
+
+builder.Services.RegisterMapsterConfiguration();
+
+
 
 builder.Services.AddControllersWithViews();
 

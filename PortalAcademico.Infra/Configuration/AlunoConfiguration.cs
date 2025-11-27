@@ -14,12 +14,21 @@ namespace PortalAcademico.Infra.Configuration
         public void Configure(EntityTypeBuilder<Aluno> builder)
         {
             builder.ToTable("Alunos");
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Nome).IsRequired().HasMaxLength(100);
-            builder.Property(a => a.Email).IsRequired().HasMaxLength(100);
-            builder.Property(a => a.DataNascimento).IsRequired();
-        }
 
+            builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.Nome)
+                   .IsRequired()
+                   .HasMaxLength(100);
+
+            builder.Property(a => a.Email)
+                   .IsRequired()
+                   .HasMaxLength(100);
+
+            builder.Property(a => a.DataNascimento)
+                   .IsRequired();
+        }
     }
+
 
 }

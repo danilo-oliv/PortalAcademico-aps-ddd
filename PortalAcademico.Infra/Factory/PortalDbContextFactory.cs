@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace PortalAcademico.Infra.Factory
 {
-    public class PortalDbContextFactory : IDesignTimeDbContextFactory<AlunoDbContext>
+    public class PortalDbContextFactory : IDesignTimeDbContextFactory<PortalAcademicoDbContext>
     {
-        public AlunoDbContext CreateDbContext(string[] args)
+        public PortalAcademicoDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<AlunoDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<PortalAcademicoDbContext>();
             optionsBuilder.UseSqlServer("Server=localhost,1433;Database=PortalAcademicoDB;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;Encrypt=False;");
-            return new AlunoDbContext(optionsBuilder.Options);
+            return new PortalAcademicoDbContext(optionsBuilder.Options);
         }
     }
 }

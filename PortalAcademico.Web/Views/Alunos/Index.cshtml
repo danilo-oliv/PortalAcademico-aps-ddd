@@ -1,0 +1,58 @@
+﻿@using PortalAcademico.Aplicacao.ViewModels
+@model IEnumerable<AlunoViewModel>
+
+<h2>Alunos</h2>
+
+<p>
+    <a asp-action="Create">Novo Aluno</a>
+</p>
+
+<input type="text" id="buscaInput" placeholder="Buscar aluno..." class="form-control mb-2" />
+<div id="resultadoBusca">
+    @await Html.PartialAsync("_ListaAlunosParcial", Model)
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data Nascimento</th>
+            <th>Turma</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Email</td>
+                <td>@item.DataNascimento.ToShortDateString()</td>
+                <td>@item.TurmaNome</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+$(document).ready(function(){
+$('#buscaInput').on('input', function(){
+    var termo = $(this).val();
+    $.ajax({
+        url: '@Url.Action("Buscar", "Alunos")',
+        data: { termo: termo },
+        success: function(result){
+            $('#resultadoBusca').html(result);
+        }
+    });
+});
+});
+
+</script>

@@ -1,0 +1,30 @@
+﻿@using PortalAcademico.Aplicacao.ViewModels
+@model IEnumerable<AlunoViewModel>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data Nascimento</th>
+            <th>Turma</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@aluno.Nome</td>
+                <td>@aluno.Email</td>
+                <td>@aluno.DataNascimento.ToShortDateString()</td>
+                <td>@aluno.TurmaNome</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@aluno.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@aluno.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@aluno.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
